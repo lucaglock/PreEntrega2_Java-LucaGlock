@@ -39,24 +39,29 @@ let tipoDolarValido = false; // Variable para rastrear si se encontró un tipo d
 
 
 for (let i = 0; i < 3; i++) {
-    let tipoDolar = prompt("Ingrese el tipo de Dolar a comprar (oficial, blue, tarjeta, turista)").toLowerCase();
+    let tipoDolar = prompt("Ingrese el tipo de Dolar a comprar (oficial, blue, tarjeta, turista)");
+    tipoDolar = tipoDolar.toLowerCase();
     let dolares = prompt("Ingrese la cantidad de dólares a comprar");
-    if (!isNaN(dolares)) {
+    if (!isNaN(dolares)&& tipoDolar==tiposDeDolar[i].dolar) {
         dolares = (parseInt(dolares));
         let resultado = calcularDolar(tipoDolar, dolares);
         let resultadoTotal = (dolares * resultado.precioDolar) + impuestoPais(dolares*resultado.precioDolar) + retencionPais(dolares*resultado.precioDolar);
         console.log("La cantidad de dolares a comprar es de:" , dolares);
         console.log("El precio del dolar", tipoDolar, "es de:" , resultado.precioDolar);
-        console.log("Sumando impuestos da un total de:" , resultadoTotal);
+        console.log("Sumando impuestos da un total de:" , resultadoTotal.toFixed(2));
         tipoDolarValido = true;
         break
 
-} else if(!tipoDolarValido) {
+} else if(!tipoDolarValido && isNaN(dolares)) {
     console.log("Inserte un tipo de dolar valido: oficial, blue, tarjeta, turista")
+    console.log("Inserte un número entero");
 
 } 
+    else if(!tipoDolarValido) {
+        console.log("Inserte un tipo de dolar valido: oficial, blue, tarjeta, turista");
+    }
     else {
         console.log("Inserte un número entero");
-        ;
     }
+
 }
